@@ -64,18 +64,21 @@
             timeout-ms = <300>;
             key-positions = <32 33>;
             bindings = <&mo ACCENT>;
+            slow-release;
         };
 				// internal-left & external-right thumb keys
 				combo_sym2 {
 						timeout-ms = <200>;
 						key-positions = <31 33>;
 						bindings = <&mo SYM2>;
+						slow-release;
 				};
 				// both left thumb keys
 				combo_settings {
 						timeout-ms = <300>;
 						key-positions = <30 31>;
 						bindings = <&mo SETTINGS>;
+						slow-release;
 				};
     };
 
