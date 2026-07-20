@@ -8,8 +8,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// OS layout assumed: "English (US, intl., with AltGr dead keys)"
-// Accents come from AltGr dead keys: RA(GRAVE)+vowel = grave, RA(SQT)+vowel = acute.
+// OS layout assumed: macOS ABC/US.
+// Accents come from Option dead keys: RA(GRAVE)+vowel = grave, RA(E)+vowel = acute.
 
 // Layer definitions
     #define BASE 0
@@ -48,12 +48,12 @@
 					#binding-cells = <1>;
 					bindings = <&kp RA(GRAVE)>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
 				};
-				// acute accent: AltGr+' dead key, then the letter (é)
+				// acute accent: Opt+e dead key, then the letter (é)
 				aac: aac {
 					label = "ZM_aac";
 					compatible = "zmk,behavior-macro-one-param";
 					#binding-cells = <1>;
-					bindings = <&kp RA(SQT)>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
+					bindings = <&kp RA(E)>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
 				};
 		};
 
@@ -128,9 +128,9 @@
         // Low frequency symbols.
        		symbols_2_layer {
 		bindings = <
-		&kp CARET &kp UNDER &kp RA(LS(N4)) &kp RA(N5) &kp HASH         &none &none &none &none &none 
+		&kp CARET &kp UNDER &kp RA(N3) &kp RA(LS(N2)) &kp HASH         &none &none &none &none &none 
 		&kp GRAVE &kp TILDE &kp BSLH &kp PIPE &kp AMPS         &none &none &none &none &none
-		&none 			&none 			 &kp RA(LS(S)) &kp RA(COMMA) &kp RA(LS(SEMI))				  &none &none &none &none &none
+		&none 			&none 			 &kp RA(N6) &kp RA(C) &kp RA(LS(N8))				  &none &none &none &none &none
           				           												&none &none        	&none &none 
 		>;
 		};
@@ -138,7 +138,7 @@
         // Used to type regional accents.
        		accent_layer {
 		bindings = <
-		&kp RA(GRAVE) &kp RA(SQT) &none &kp RA(COMMA) &none        &none &none &none &none &none 
+		&kp RA(GRAVE) &kp RA(E) &none &kp RA(C) &none        &none &none &none &none &none 
 		&agr A &agr I &agr O &agr E &aac E                          &none &none &none &none &none
 		&none &none &none &agr U &none                              &none &none &none &none &none
           				     &none &none                         &none &none 
