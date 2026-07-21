@@ -60,9 +60,12 @@ Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `Ent` tap / 
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │     │     │     │     │     │   │C-BSP│ BSP │CAPS │     │     │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │     │ TAB │         │  ⌫  │ FNC │
+               │     │ TAB │         │ ⇧⇥  │ FNC │
                └─────┴─────┘         └─────┴─────┘
 ```
+`TAB` is the left-inner thumb, `Shift+Tab` (`⇧⇥`) the right-inner thumb — so both
+directions are one press each while holding EXT.
+
 Left-hand mods here are plain holds (no home-row needed inside a layer), so you can
 chord `⇧`/`⌘`/`⌥` + arrows for selection and word/line nav. `⌘1`–`⌘5` = macOS spaces.
 
@@ -106,7 +109,7 @@ chord `⇧`/`⌘`/`⌥` + arrows for selection and word/line nav. `⌘1`–`⌘5
 ```
 `dk` = AltGr dead key (US-intl layout)
 
-### SETTINGS (6) — hold both left thumbs (combo)
+### SETTINGS (6) — hold both left thumbs + right-inner thumb (combo)
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │BOOT │     │     │BTCLR│BT 0 │   │BT 3 │     │UNSTK│     │BOOT │
@@ -122,6 +125,6 @@ chord `⇧`/`⌘`/`⌥` + arrows for selection and word/line nav. `⌘1`–`⌘5
 ### Thumb combos
 | Combo | Layer |
 |---|---|
-| both left thumbs | SETTINGS |
+| both left thumbs + right-inner thumb | SETTINGS |
 | left-inner + right-outer | SYM2 |
 | both right thumbs | ACCENT |
