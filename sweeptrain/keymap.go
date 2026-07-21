@@ -64,6 +64,62 @@ func buildDrillSet() []entry {
 	return set
 }
 
+// --- Modifier-chord drill (home-row mods) ---
+
+// ctrlLetters are the Ctrl+<letter> chords worth drilling: common shell/vim/TUI
+// bindings. All map to unambiguous control bytes (none collide with Tab/Enter/
+// Esc/Backspace), so the result can be read straight off the terminal. Cmd
+// chords are intentionally excluded — macOS intercepts them before stdin.
+var ctrlLetters = []rune{'a', 'c', 'd', 'e', 'f', 'n', 'p', 'r', 'u', 'w'}
+
+type modEntry struct {
+	letter   rune   // letter to combine, e.g. 'u'
+	code     rune   // control byte the chord produces, e.g. 21 (Ctrl+U)
+	holdKey  rune   // opposite-hand home-row Ctrl to hold: 'd' or 'k'
+	holdHand string // hand that holds Ctrl: "left" or "right"
+}
+
+func buildModDrillSet() []modEntry {
+	var set []modEntry
+	for _, r := range ctrlLetters {
+		pos := basePos(r)
+		if pos < 0 {
+			continue
+		}
+		// Chord with the opposite hand's Ctrl (left Ctrl = d, right Ctrl = k).
+		hold, hand := 'k', "right"
+		if pos%10 >= 5 { // letter sits on the right hand
+			hold, hand = 'd', "left"
+		}
+		set = append(set, modEntry{r, r - 'a' + 1, hold, hand})
+	}
+	return set
+}
+
+// basePos returns the base-layer position of a single-rune legend, or -1.
+func basePos(r rune) int {
+	for i := 0; i < 30; i++ {
+		if layers["base"][i] == string(r) {
+			return i
+		}
+	}
+	return -1
+}
+
+// describeInput renders a received byte for feedback (control codes as Ctrl+X).
+func describeInput(r rune) string {
+	switch {
+	case r >= 1 && r <= 26:
+		return "Ctrl+" + string('a'+r-1)
+	case r == 27:
+		return "Esc"
+	case r == ' ':
+		return "Space"
+	default:
+		return string(r)
+	}
+}
+
 // renderLayer draws the layer grid with position hi highlighted (inverse video).
 func renderLayer(layer string, hi int) string {
 	var b strings.Builder

@@ -30,3 +30,27 @@ func TestDrillSet(t *testing.T) {
 		}
 	}
 }
+
+func TestModDrillSet(t *testing.T) {
+	set := buildModDrillSet()
+	if len(set) == 0 {
+		t.Fatal("empty mod drill set")
+	}
+	for _, e := range set {
+		if e.code != e.letter-'a'+1 {
+			t.Errorf("%c: control code %d, want %d", e.letter, e.code, e.letter-'a'+1)
+		}
+		// Ctrl must be held by the hand opposite the letter.
+		if e.holdKey != 'd' && e.holdKey != 'k' {
+			t.Errorf("%c: hold key %c is not a Ctrl home key", e.letter, e.holdKey)
+		}
+		if (basePos(e.letter)%10 < 5) == (basePos(e.holdKey)%10 < 5) {
+			t.Errorf("%c: hold key %c is on the same hand", e.letter, e.holdKey)
+		}
+		// Codes must not collide with Tab/Enter/Esc/Backspace/LF.
+		switch e.code {
+		case 8, 9, 10, 13, 27:
+			t.Errorf("%c: ambiguous control code %d", e.letter, e.code)
+		}
+	}
+}

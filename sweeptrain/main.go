@@ -20,22 +20,8 @@ type stat struct {
 
 func main() {
 	layerFlag := flag.String("layer", "", "drill only this layer (base|sym|sym2|accent)")
+	modsFlag := flag.Bool("mods", false, "drill Ctrl+<letter> home-row-mod chords instead of characters")
 	flag.Parse()
-
-	set := buildDrillSet()
-	if *layerFlag != "" {
-		if _, ok := layers[*layerFlag]; !ok {
-			fmt.Fprintf(os.Stderr, "unknown layer %q\n", *layerFlag)
-			os.Exit(1)
-		}
-		var filtered []entry
-		for _, e := range set {
-			if e.layer == *layerFlag {
-				filtered = append(filtered, e)
-			}
-		}
-		set = filtered
-	}
 
 	fd := int(os.Stdin.Fd())
 	old, err := term.MakeRaw(fd)
@@ -48,9 +34,34 @@ func main() {
 		term.Restore(fd, old)
 		summary(stats)
 	}()
+	in := bufio.NewReader(os.Stdin)
+
+	if *modsFlag {
+		modDrill(in, stats)
+		return
+	}
+
+	charDrill(in, stats, *layerFlag)
+}
+
+// charDrill prompts for a character and checks the typed rune.
+func charDrill(in *bufio.Reader, stats map[rune]*stat, layerFlag string) {
+	set := buildDrillSet()
+	if layerFlag != "" {
+		if _, ok := layers[layerFlag]; !ok {
+			fmt.Fprintf(os.Stderr, "unknown layer %q\r\n", layerFlag)
+			return
+		}
+		var filtered []entry
+		for _, e := range set {
+			if e.layer == layerFlag {
+				filtered = append(filtered, e)
+			}
+		}
+		set = filtered
+	}
 
 	fmt.Print("sweeptrain — type the shown character on your sweep. Esc or Ctrl-C to quit.\r\n\r\n")
-	in := bufio.NewReader(os.Stdin)
 	for {
 		e := pick(set, stats)
 		st := stats[e.r]
@@ -79,6 +90,65 @@ func main() {
 			fmt.Printf("type: %c  ", e.r)
 		}
 	}
+}
+
+// modDrill prompts for a Ctrl+<letter> chord and checks the control byte it
+// produces. Esc quits (Ctrl+C is itself a drillable chord here).
+func modDrill(in *bufio.Reader, stats map[rune]*stat) {
+	set := buildModDrillSet()
+	fmt.Print("sweeptrain — mod chords. Type the Ctrl chord shown: hold the opposite-hand\r\n")
+	fmt.Print("Ctrl home key (d / k) with the letter. Esc to quit.\r\n\r\n")
+	for {
+		e := pickMod(set, stats)
+		st := stats[e.letter]
+		if st == nil {
+			st = &stat{}
+			stats[e.letter] = st
+		}
+		fmt.Printf("type: Ctrl+%c  ", e.letter)
+		start := time.Now()
+		for {
+			r, _, err := in.ReadRune()
+			if err != nil || r == 27 { // Esc quits
+				fmt.Print("\r\n")
+				return
+			}
+			st.attempts++
+			if r == e.code {
+				st.correct++
+				st.total += time.Since(start)
+				fmt.Print("✓\r\n")
+				break
+			}
+			st.errors++
+			fmt.Printf("✗ (got %s)  hint — hold %c (%s Ctrl) + %c\r\n", describeInput(r), e.holdKey, e.holdHand, e.letter)
+			fmt.Print(renderLayer("base", basePos(e.letter)))
+			fmt.Printf("type: Ctrl+%c  ", e.letter)
+		}
+	}
+}
+
+// pickMod weights toward chords you've missed: weight = errors + 1.
+func pickMod(set []modEntry, stats map[rune]*stat) modEntry {
+	total := 0
+	for _, e := range set {
+		if st := stats[e.letter]; st != nil {
+			total += st.errors
+		}
+		total++
+	}
+	n := rand.Intn(total)
+	for _, e := range set {
+		w := 1
+		if st := stats[e.letter]; st != nil {
+			w += st.errors
+		}
+		if n < w {
+			return e
+		}
+		n -= w
+	}
+	return set[len(set)-1]
 }
 
 // pick weights toward keys you've missed: weight = errors + 1.
