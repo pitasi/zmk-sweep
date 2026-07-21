@@ -20,15 +20,25 @@ This layout is inspired by [Seniply by Stevep99](https://stevep99.github.io/seni
 │  q  │  w  │  e  │  r  │  t  │   │  y  │  u  │  i  │  o  │  p  │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │  a  │  s  │  d  │  f  │  g  │   │  h  │  j  │  k  │  l  │  '  │
+│  ⌘  │  ⌥  │  ⌃  │  ⇧  │     │   │     │  ⇧  │  ⌃  │  ⌥  │  ⌘  │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │  z  │  x  │  c  │  v  │  b  │   │  n  │  m  │  ,  │  .  │  ;  │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │ EXT │ ⇧/␣ │         │  ␣  │ SYM │
+               │ Esc │  ␣  │         │  ⌫  │ Ent │
+               │ EXT │     │         │     │ SYM │
                └─────┴─────┘         └─────┴─────┘
 ```
-Thumbs: `EXT` hold · `⇧/␣` shift on hold, space on tap · `SYM` sticky layer
+Home-row mods — **hold** a home key for the modifier shown below it (tap = letter):
+`a`=⌘ `s`=⌥ `d`=⌃ `f`=⇧ · `j`=⇧ `k`=⌃ `l`=⌥ `'`=⌘. Positional + prior-idle tuned,
+so same-hand rolls stay plain letters.
 
-### SYM (1) — tap right-outer thumb (sticky)
+Shortcuts = hold the **opposite-hand** mod + the real letter, on this layer:
+`Ctrl+c`=K+c · `Ctrl+d`=K+d · `Ctrl+f`=K+f · `Ctrl+u`=D+u · `Ctrl+n`=D+n · `Ctrl+p`=D+p ·
+`⌘c`=`'`+c · `⌘v`=`'`+v · `⌘z`=`'`+z.
+
+Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `Ent` tap / `SYM` hold
+
+### SYM (1) — hold right-outer thumb (tap = Enter)
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │  1  │  2  │  3  │  4  │  5  │   │  6  │  7  │  8  │  9  │  0  │
@@ -41,26 +51,27 @@ Thumbs: `EXT` hold · `⇧/␣` shift on hold, space on tap · `SYM` sticky laye
                └─────┴─────┘         └─────┴─────┘
 ```
 
-### EXT (2) — hold left-inner thumb
+### EXT (2) — hold left-outer thumb (tap = Esc)
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-│ ESC │     │     │     │     │   │HOME │PGDN │PGUP │ END │CAPS │
+│ ESC │ ⌘1  │ ⌘2  │ ⌘3  │ ⌘4  │   │HOME │PGDN │PGUP │ END │ ⌘5  │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-│⌥ sk │⌘ sk │⇧ sk │⌃ sk │AltGr│   │  ←  │  ↓  │  ↑  │  →  │ DEL │
+│  ⌘  │  ⌥  │  ⌃  │  ⇧  │AltGr│   │  ←  │  ↓  │  ↑  │  →  │ DEL │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-│ C-z │ C-x │ C-c │ TAB │ C-v │   │C-BSP│ BSP │     │     │     │
+│     │     │     │     │     │   │C-BSP│ BSP │CAPS │     │     │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │     │ CTRL│         │ENTER│ FNC │
+               │     │ TAB │         │  ⌫  │ FNC │
                └─────┴─────┘         └─────┴─────┘
 ```
-`sk` = sticky modifier
+Left-hand mods here are plain holds (no home-row needed inside a layer), so you can
+chord `⇧`/`⌘`/`⌥` + arrows for selection and word/line nav. `⌘1`–`⌘5` = macOS spaces.
 
-### FNC (3) — SYM + left-inner thumb, or EXT + right-outer thumb
+### FNC (3) — SYM + left-outer thumb, or EXT + right-outer thumb
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │ F1  │ F2  │ F3  │ F4  │ F5  │   │ F6  │ F7  │ F8  │ F9  │ F10 │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-│⌥ sk │⌘ sk │⇧ sk │⌃ sk │AltGr│   │ F11 │ F12 │PrtSc│     │     │
+│  ⌘  │  ⌥  │  ⌃  │  ⇧  │AltGr│   │ F11 │ F12 │PrtSc│     │     │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │     │     │     │     │     │   │     │     │     │     │     │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘

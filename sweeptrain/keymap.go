@@ -9,7 +9,7 @@ var layers = map[string][34]string{
 		"q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
 		"a", "s", "d", "f", "g", "h", "j", "k", "l", "'",
 		"z", "x", "c", "v", "b", "n", "m", ",", ".", ";",
-		"EXT", "⇧␣", "␣", "SYM",
+		"EXT", "␣", "⌫", "SYM",
 	},
 	"sym": {
 		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
@@ -36,7 +36,7 @@ var layerOrder = []string{"base", "sym", "sym2", "accent"}
 
 var layerHint = map[string]string{
 	"base":   "no layer, just type it",
-	"sym":    "tap right-outer thumb (sticky), then the key",
+	"sym":    "hold right-outer thumb, then the key",
 	"sym2":   "hold left-inner + right-outer thumbs, then the key",
 	"accent": "hold both right thumbs, then the key",
 }
