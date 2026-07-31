@@ -16,7 +16,8 @@
 //   Right home row:  J=Shift  K=Ctrl  L=Alt  '=Gui
 // A left-hand mod only activates as a mod when the *next* key is on the right
 // hand or a thumb (and vice-versa), so same-hand rolls stay plain letters.
-// require-prior-idle-ms makes them behave as plain letters during fast typing.
+// require-prior-idle-ms makes them behave as plain letters during fast typing;
+// Shift (F/J) is exempt from it, since capitals follow a keypress by nature.
 //
 // Ctrl/Cmd shortcuts therefore need no dedicated keys: hold the opposite-hand
 // mod and press the real letter, on the base layer.
@@ -72,6 +73,42 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
+        };
+        // Shift-only variants of the above, without require-prior-idle-ms:
+        // capitals almost always follow a keypress (space or the previous
+        // letter), so that guard kills the hold exactly when Shift is wanted.
+        // The other mods keep it because a stray Gui/Ctrl fires app shortcuts,
+        // while a stray capital is only a typo.
+        hsl: home_row_shift_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
+        };
+        hsr: home_row_shift_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
+        };
+        // Thumb layer-taps. Stock &lt is tap-preferred, so the layer only
+        // engages once the 200ms term expires — a fast chord releases the thumb
+        // before that and emits ESC/ENTER instead. Balanced resolves to the
+        // layer as soon as the chorded key is released.
+        tlt: thumb_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
     };
 
@@ -134,9 +171,9 @@
         default_layer {
         bindings = <
         &kp Q        &kp W        &kp E         &kp R         &kp T        &kp Y  &kp U         &kp I         &kp O        &kp P
-        &hml LGUI A  &hml LALT S  &hml LCTRL D  &hml LSHFT F  &kp G        &kp H  &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &hmr RGUI SQT
+        &hml LGUI A  &hml LALT S  &hml LCTRL D  &hsl LSHFT F  &kp G        &kp H  &hsr RSHFT J  &hmr RCTRL K  &hmr RALT L  &hmr RGUI SQT
         &kp Z        &kp X        &kp C         &kp V         &kp B        &kp N  &kp M         &kp COMMA     &kp DOT      &kp SEMI
-                                        &lt EXT ESC  &kp SPACE      &kp BSPC  &lt SYM ENTER
+                                       &tlt EXT ESC  &kp SPACE      &kp BSPC  &tlt SYM ENTER
         >;
         };
 

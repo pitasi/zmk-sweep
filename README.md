@@ -30,7 +30,11 @@ This layout is inspired by [Seniply by Stevep99](https://stevep99.github.io/seni
 ```
 Home-row mods — **hold** a home key for the modifier shown below it (tap = letter):
 `a`=⌘ `s`=⌥ `d`=⌃ `f`=⇧ · `j`=⇧ `k`=⌃ `l`=⌥ `'`=⌘. Positional + prior-idle tuned,
-so same-hand rolls stay plain letters.
+so same-hand rolls stay plain letters. The two ⇧ keys skip the prior-idle guard
+(capitals always follow a keypress), so they hold even mid-burst.
+
+Both thumb layer-taps (`EXT`/`SYM`) use the `balanced` flavor: the layer wins as
+soon as the chorded key is released, so a fast chord no longer emits `Esc`/`Ent`.
 
 Shortcuts = hold the **opposite-hand** mod + the real letter, on this layer:
 `Ctrl+c`=K+c · `Ctrl+d`=K+d · `Ctrl+f`=K+f · `Ctrl+u`=D+u · `Ctrl+n`=D+n · `Ctrl+p`=D+p ·
