@@ -36,9 +36,10 @@ drilling the layout into muscle memory.
 - **Key positions** matter: `KEYS_L`, `KEYS_R`, `THUMBS` (0–33) drive the
   positional hold-taps and combos. Rows are 3×10 + 4 thumbs (30,31 left /
   32,33 right).
-- **Layer access**: `SYM`/`EXT` via layer-taps on the outer thumbs; `SYM2`,
-  `ACCENT`, `SETTINGS` via thumb **combos** (see the `combos` node). If you move
-  thumb keys, update the combo `key-positions`.
+- **Layer access**: right-outer thumb holds `SYM` only (no tap output);
+  left-outer thumb taps Esc / holds `EXT`. Enter is `EXT` + physical `M`.
+  `SYM2`, `ACCENT`, `SETTINGS` use thumb **combos** (see the `combos` node).
+  If you move thumb keys, update the combo `key-positions`.
 - Each layer's `bindings` block is formatted as an aligned grid mirroring the
   physical layout — preserve that alignment when editing.
 

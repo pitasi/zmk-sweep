@@ -99,10 +99,8 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
-        // Thumb layer-taps. Stock &lt is tap-preferred, so the layer only
-        // engages once the 200ms term expires — a fast chord releases the thumb
-        // before that and emits ESC/ENTER instead. Balanced resolves to the
-        // layer as soon as the chorded key is released.
+        // EXT/Esc layer-tap: balanced resolves to EXT when the chorded key
+        // is released, rather than requiring the full tapping term.
         tlt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -173,7 +171,7 @@
         &kp Q        &kp W        &kp E         &kp R         &kp T        &kp Y  &kp U         &kp I         &kp O        &kp P
         &hml LGUI A  &hml LALT S  &hml LCTRL D  &hsl LSHFT F  &kp G        &kp H  &hsr RSHFT J  &hmr RCTRL K  &hmr RALT L  &hmr RGUI SQT
         &kp Z        &kp X        &kp C         &kp V         &kp B        &kp N  &kp M         &kp COMMA     &kp DOT      &kp SEMI
-                                       &tlt EXT ESC  &kp SPACE      &kp BSPC  &tlt SYM ENTER
+                                       &tlt EXT ESC  &kp SPACE      &kp BSPC  &mo SYM
         >;
         };
 
@@ -193,7 +191,7 @@
         bindings = <
         &kp ESC   &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4)    &kp HOME     &kp PG_DN &kp PG_UP &kp END   &kp LG(N5)
         &kp LGUI  &kp LALT   &kp LCTRL  &kp LSHFT  &kp RALT      &kp LEFT     &kp DOWN  &kp UP    &kp RIGHT &kp DEL
-        &none     &none      &none      &none      &none         &kp LC(BSPC) &kp BSPC  &kp CAPS  &none     &none
+        &none     &none      &none      &none      &none         &kp LC(BSPC) &kp ENTER &kp CAPS  &none     &none
                                     &trans  &kp TAB       &kp LS(TAB)  &mo FNC
         >;
         };

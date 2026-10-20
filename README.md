@@ -24,7 +24,7 @@ This layout is inspired by [Seniply by Stevep99](https://stevep99.github.io/seni
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │  z  │  x  │  c  │  v  │  b  │   │  n  │  m  │  ,  │  .  │  ;  │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │ Esc │  ␣  │         │  ⌫  │ Ent │
+               │ Esc │  ␣  │         │  ⌫  │     │
                │ EXT │     │         │     │ SYM │
                └─────┴─────┘         └─────┴─────┘
 ```
@@ -33,16 +33,18 @@ Home-row mods — **hold** a home key for the modifier shown below it (tap = let
 so same-hand rolls stay plain letters. The two ⇧ keys skip the prior-idle guard
 (capitals always follow a keypress), so they hold even mid-burst.
 
-Both thumb layer-taps (`EXT`/`SYM`) use the `balanced` flavor: the layer wins as
-soon as the chorded key is released, so a fast chord no longer emits `Esc`/`Ent`.
+The `EXT`/`Esc` thumb layer-tap uses the `balanced` flavor: the layer wins when
+an interrupting key is pressed and released while the thumb is held.
+The right-outer thumb is `SYM` only: tapping it alone types nothing, so symbol
+access cannot fall back to Enter. For Enter, hold `EXT` and press the physical `M` key.
 
 Shortcuts = hold the **opposite-hand** mod + the real letter, on this layer:
 `Ctrl+c`=K+c · `Ctrl+d`=K+d · `Ctrl+f`=K+f · `Ctrl+u`=D+u · `Ctrl+n`=D+n · `Ctrl+p`=D+p ·
 `⌘c`=`'`+c · `⌘v`=`'`+v · `⌘z`=`'`+z.
 
-Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `Ent` tap / `SYM` hold
+Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `SYM` hold only
 
-### SYM (1) — hold right-outer thumb (tap = Enter)
+### SYM (1) — hold right-outer thumb (no tap output)
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │  1  │  2  │  3  │  4  │  5  │   │  6  │  7  │  8  │  9  │  0  │
@@ -62,11 +64,14 @@ Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `Ent` tap / 
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │  ⌘  │  ⌥  │  ⌃  │  ⇧  │AltGr│   │  ←  │  ↓  │  ↑  │  →  │ DEL │
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-│     │     │     │     │     │   │C-BSP│ BSP │CAPS │     │     │
+│     │     │     │     │     │   │C-BSP│ Ent │CAPS │     │     │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
                │     │ TAB │         │ ⇧⇥  │ FNC │
                └─────┴─────┘         └─────┴─────┘
 ```
+`Enter` is on the physical `M` key (right index finger), replacing the duplicate
+EXT-layer Backspace. The dedicated base-layer Backspace thumb is unchanged.
+
 `TAB` is the left-inner thumb, `Shift+Tab` (`⇧⇥`) the right-inner thumb — so both
 directions are one press each while holding EXT.
 
