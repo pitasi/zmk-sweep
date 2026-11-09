@@ -25,7 +25,7 @@ This layout is inspired by [Seniply by Stevep99](https://stevep99.github.io/seni
 │  z  │  x  │  c  │  v  │  b  │   │  n  │  m  │  ,  │  .  │  ;  │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
                │ Esc │  ␣  │         │  ⌫  │     │
-               │ EXT │     │         │     │ SYM │
+               │     │ EXT │         │     │ SYM │
                └─────┴─────┘         └─────┴─────┘
 ```
 Home-row mods — **hold** a home key for the modifier shown below it (tap = letter):
@@ -33,8 +33,11 @@ Home-row mods — **hold** a home key for the modifier shown below it (tap = let
 so same-hand rolls stay plain letters. The two ⇧ keys skip the prior-idle guard
 (capitals always follow a keypress), so they hold even mid-burst.
 
-The `EXT`/`Esc` thumb layer-tap uses the `balanced` flavor: the layer wins when
-an interrupting key is pressed and released while the thumb is held.
+The left-outer thumb is plain `Esc`, with no layer-switching hold action.
+The left-inner thumb taps `Space` / holds `EXT`. Its layer-tap uses the `balanced`
+flavor: the layer wins when an interrupting key is pressed and released while
+the thumb is held, or after the 200 ms tapping term. This removes Esc/EXT
+misfires; a chord resolved as a tap can produce Space instead.
 The right-outer thumb is `SYM` only: tapping it alone types nothing, so symbol
 access cannot fall back to Enter. For Enter, hold `EXT` and press the physical `M` key.
 
@@ -42,7 +45,7 @@ Shortcuts = hold the **opposite-hand** mod + the real letter, on this layer:
 `Ctrl+c`=K+c · `Ctrl+d`=K+d · `Ctrl+f`=K+f · `Ctrl+u`=D+u · `Ctrl+n`=D+n · `Ctrl+p`=D+p ·
 `⌘c`=`'`+c · `⌘v`=`'`+v · `⌘z`=`'`+z.
 
-Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `SYM` hold only
+Thumbs: plain `Esc` · `Space` tap / `EXT` hold · `⌫` backspace · `SYM` hold only
 
 ### SYM (1) — hold right-outer thumb (no tap output)
 ```
@@ -57,7 +60,7 @@ Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `SYM` hold o
                └─────┴─────┘         └─────┴─────┘
 ```
 
-### EXT (2) — hold left-outer thumb (tap = Esc)
+### EXT (2) — hold left-inner thumb (tap = Space)
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │ ESC │ ⌘1  │ ⌘2  │ ⌘3  │ ⌘4  │   │HOME │PGDN │PGUP │ END │ ⌘5  │
@@ -66,19 +69,21 @@ Thumbs: `Esc` tap / `EXT` hold · `␣` space · `⌫` backspace · `SYM` hold o
 ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
 │     │     │     │     │     │   │C-BSP│ Ent │CAPS │     │     │
 └─────┴─────┴──┬──┴──┬──┴──┬──┘   └──┬──┴──┬──┴──┬──┴─────┴─────┘
-               │     │ TAB │         │ ⇧⇥  │ FNC │
+               │ TAB │     │         │ ⇧⇥  │SYM2 │
                └─────┴─────┘         └─────┴─────┘
 ```
 `Enter` is on the physical `M` key (right index finger), replacing the duplicate
 EXT-layer Backspace. The dedicated base-layer Backspace thumb is unchanged.
 
-`TAB` is the left-inner thumb, `Shift+Tab` (`⇧⇥`) the right-inner thumb — so both
-directions are one press each while holding EXT.
+`TAB` is the left-outer thumb, `Shift+Tab` (`⇧⇥`) the right-inner thumb — so both
+directions are one press each while holding EXT with the left-inner thumb.
+The right-outer thumb selects `SYM2`, matching the left-inner + right-outer
+combo even when EXT is already active; use SYM + left-outer for `FNC`.
 
 Left-hand mods here are plain holds (no home-row needed inside a layer), so you can
 chord `⇧`/`⌘`/`⌥` + arrows for selection and word/line nav. `⌘1`–`⌘5` = macOS spaces.
 
-### FNC (3) — SYM + left-outer thumb, or EXT + right-outer thumb
+### FNC (3) — hold SYM (right-outer thumb), then left-outer thumb
 ```
 ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
 │ F1  │ F2  │ F3  │ F4  │ F5  │   │ F6  │ F7  │ F8  │ F9  │ F10 │

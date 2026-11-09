@@ -99,7 +99,7 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
-        // EXT/Esc layer-tap: balanced resolves to EXT when the chorded key
+        // EXT/Space layer-tap: balanced resolves to EXT when the chorded key
         // is released, rather than requiring the full tapping term.
         tlt: thumb_layer_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -153,7 +153,7 @@
                     slow-release;
             };
             // both left thumbs + right-inner thumb (deliberate, rare layer).
-            // Not <30 31> anymore: that shadowed EXT-hold + inner-thumb TAB.
+            // Keep <30 31> free for EXT-hold + outer-thumb TAB.
             combo_settings {
                     timeout-ms = <300>;
                     key-positions = <30 31 32>;
@@ -171,7 +171,7 @@
         &kp Q        &kp W        &kp E         &kp R         &kp T        &kp Y  &kp U         &kp I         &kp O        &kp P
         &hml LGUI A  &hml LALT S  &hml LCTRL D  &hsl LSHFT F  &kp G        &kp H  &hsr RSHFT J  &hmr RCTRL K  &hmr RALT L  &hmr RGUI SQT
         &kp Z        &kp X        &kp C         &kp V         &kp B        &kp N  &kp M         &kp COMMA     &kp DOT      &kp SEMI
-                                       &tlt EXT ESC  &kp SPACE      &kp BSPC  &mo SYM
+                                       &kp ESC  &tlt EXT SPACE      &kp BSPC  &mo SYM
         >;
         };
 
@@ -186,13 +186,13 @@
         };
 
         // Navigation, page movement, and mods for chording with arrows.
-        // Reached by holding the left-outer thumb (also taps ESC).
+        // Reached by holding the left-inner thumb (taps SPACE).
         ext_layer {
         bindings = <
         &kp ESC   &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4)    &kp HOME     &kp PG_DN &kp PG_UP &kp END   &kp LG(N5)
         &kp LGUI  &kp LALT   &kp LCTRL  &kp LSHFT  &kp RALT      &kp LEFT     &kp DOWN  &kp UP    &kp RIGHT &kp DEL
         &none     &none      &none      &none      &none         &kp LC(BSPC) &kp ENTER &kp CAPS  &none     &none
-                                    &trans  &kp TAB       &kp LS(TAB)  &mo FNC
+                                    &kp TAB  &trans       &kp LS(TAB)  &mo SYM2
         >;
         };
 
